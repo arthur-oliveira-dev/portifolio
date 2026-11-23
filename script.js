@@ -1,219 +1,153 @@
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js';
-
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/loaders/GLTFLoader.js';
-
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/controls/OrbitControls.js';
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const canvas = document.getElementById('penguinCanvas');
-
 
 // ========================
 // CENA
 // ========================
-
 const scene = new THREE.Scene();
-
-
-// ========================
-// CÂMERA
-// ========================
-
-const camera = new THREE.PerspectiveCamera(
-    35,
-    canvas.clientWidth / canvas.clientHeight,
-    0.1,
-    100
-);
-
-camera.position.set(0, 1, 4);
-
 
 // ========================
 // RENDERIZADOR
 // ========================
-
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas,
+    canvas,
     antialias: true,
     alpha: true
 });
-
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-renderer.setSize(
-    canvas.clientWidth,
-    canvas.clientHeight,
-    false
-);
-
+renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
-
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1;
 
 // ========================
-// LUZ
+// AMBIENTE (reflexos que dão cor e volume aos materiais)
 // ========================
+const pmremGenerator = new THREE.PMREMGenerator(renderer);
+scene.environment = pmremGenerator.fromScene(new RoomEnvironment(), 0.04).texture;
 
-const ambientLight = new THREE.HemisphereLight(
-    0xffffff,
-    0x555555,
-    2
+// ========================
+// CÂMERA
+// ========================
+const camera = new THREE.PerspectiveCamera(
+    35,
+    canvas.clientWidth / canvas.clientHeight || 1,
+    0.1,
+    100
 );
 
-scene.add(ambientLight);
+// ========================
+// LUZES
+// ========================
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x555555, 1);
+scene.add(hemiLight);
 
-
-const light = new THREE.DirectionalLight(
-    0xffffff,
-    3
-);
-
-light.position.set(3, 5, 4);
-
-scene.add(light);
-
+const dirLight = new THREE.DirectionalLight(0xffffff, 2);
+dirLight.position.set(3, 5, 4);
+scene.add(dirLight);
 
 // ========================
 // CONTROLES
 // ========================
-
-const controls = new OrbitControls(
-    camera,
-    renderer.domElement
-);
-
+const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.enablePan = false;
-
-controls.minDistance = 2;
-controls.maxDistance = 6;
-
 
 // ========================
 // MODELO
 // ========================
-
 const loader = new GLTFLoader();
 
 loader.load(
-
     './images_models/club_penguin.glb',
 
-    function (gltf) {
-
+    (gltf) => {
         console.log('PINGUIM CARREGADO!');
 
         const penguin = gltf.scene;
 
+        // Diagnóstico: mostra se os meshes têm cor e textura
+        penguin.traverse((child) => {
+            if (child.isMesh) {
+                console.log('Mesh:', child.name, {
+                    cor: child.material.color,
+                    textura: child.material.map ? 'sim' : 'não'
+                });
+            }
+        });
+
+        // 1. Normalizar o tamanho: o modelo passa a ter 2 unidades de altura
+        let box = new THREE.Box3().setFromObject(penguin);
+        const size = box.getSize(new THREE.Vector3());
+        const scale = 2 / Math.max(size.x, size.y, size.z);
+        penguin.scale.setScalar(scale);
+
         scene.add(penguin);
 
+        // 2. Centralizar o modelo na origem
+        box = new THREE.Box3().setFromObject(penguin);
+        const center = box.getCenter(new THREE.Vector3());
+        penguin.position.sub(center);
 
-        // Descobrir tamanho do modelo
-        const box = new THREE.Box3().setFromObject(penguin);
+        // 3. Calcular distância da câmera pelo tamanho final
+        box = new THREE.Box3().setFromObject(penguin);
+        const finalSize = box.getSize(new THREE.Vector3());
+        const radius = finalSize.length() / 2;
+        const fov = THREE.MathUtils.degToRad(camera.fov);
+        const distance = (radius / Math.sin(fov / 2)) * 1.1;
 
-        const center = box.getCenter(
-            new THREE.Vector3()
-        );
+        camera.position.set(0, 0, distance);
+        camera.near = distance / 100;
+        camera.far = distance * 10;
+        camera.updateProjectionMatrix();
 
-        const size = box.getSize(
-            new THREE.Vector3()
-        );
-
-
-        // Centralizar
-        penguin.position.x -= center.x;
-        penguin.position.z -= center.z;
-        penguin.position.y -= box.min.y;
-
-
-        // Ajustar câmera ao tamanho do pinguim
-        const maxSize = Math.max(
-            size.x,
-            size.y,
-            size.z
-        );
-
-        camera.position.set(
-            0,
-            maxSize * 0.5,
-            maxSize * 2.8
-        );
-
-
-        controls.target.set(
-            0,
-            maxSize * 0.5,
-            0
-        );
-
+        // 4. Limites de zoom proporcionais ao tamanho do modelo
+        controls.target.set(0, 0, 0);
+        controls.minDistance = distance * 0.6;
+        controls.maxDistance = distance * 1.6;
         controls.update();
-
     },
 
-    function (progress) {
-
-        console.log(
-            'Carregando:',
-            Math.round(
-                (progress.loaded / progress.total) * 100
-            ) + '%'
-        );
-
+    (progress) => {
+        if (progress.total) {
+            console.log(
+                'Carregando:',
+                Math.round((progress.loaded / progress.total) * 100) + '%'
+            );
+        }
     },
 
-    function (error) {
-
-        console.error(
-            'ERRO AO CARREGAR O PINGUIM:',
-            error
-        );
-
+    (error) => {
+        console.error('ERRO AO CARREGAR O PINGUIM:', error);
     }
-
 );
 
-
 // ========================
-// TAMANHO DA JANELA
+// TAMANHO DO CANVAS
 // ========================
-
-function resize() {
-
+function resizeRenderer() {
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
+    if (width === 0 || height === 0) return;
 
     camera.aspect = width / height;
-
     camera.updateProjectionMatrix();
-
-    renderer.setSize(
-        width,
-        height,
-        false
-    );
-
+    renderer.setSize(width, height, false);
 }
 
-window.addEventListener(
-    'resize',
-    resize
-);
-
+new ResizeObserver(resizeRenderer).observe(canvas);
+window.addEventListener('resize', resizeRenderer);
 
 // ========================
 // ANIMAÇÃO
 // ========================
-
 function animate() {
-
     requestAnimationFrame(animate);
-
     controls.update();
-
-    renderer.render(
-        scene,
-        camera
-    );
-
+    renderer.render(scene, camera);
 }
-
 animate();
