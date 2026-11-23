@@ -18,7 +18,7 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1;
+renderer.toneMappingExposure = 0.7;
 
 
 const pmremGenerator = new THREE.PMREMGenerator(renderer);
@@ -34,13 +34,12 @@ const camera = new THREE.PerspectiveCamera(
 );
 
 
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0x555555, 1);
+const hemiLight = new THREE.HemisphereLight(0xffffff, 0x555555, 0.5);
 scene.add(hemiLight);
 
-const dirLight = new THREE.DirectionalLight(0xffffff, 2);
+const dirLight = new THREE.DirectionalLight(0xffffff, 1);
 dirLight.position.set(3, 5, 4);
 scene.add(dirLight);
-
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
