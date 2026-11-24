@@ -4,6 +4,47 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const canvas = document.getElementById('penguinCanvas');
+const spriteCanvas = document.querySelector('.penguin');
+
+// Cada PNG da pasta é um quadro de 498 × 498 da dança.
+if (spriteCanvas) {
+    const spriteContext = spriteCanvas.getContext('2d');
+    const frames = Array.from({ length: 33 }, (_, index) => {
+        const image = new Image();
+        image.src = `./Animação_CBP/sprite_danca_${index + 1}.png`;
+        return image;
+    });
+    let frameIndex = 0;
+    let lastFrameTime = 0;
+    const frameDuration = 1000 / 12;
+
+    function drawSprite(time = 0) {
+        const bounds = spriteCanvas.getBoundingClientRect();
+        const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+        const width = Math.round(bounds.width * pixelRatio);
+        const height = Math.round(bounds.height * pixelRatio);
+        if (spriteCanvas.width !== width || spriteCanvas.height !== height) {
+            spriteCanvas.width = width;
+            spriteCanvas.height = height;
+        }
+
+        if (!spriteCanvas.matches(':hover') && time - lastFrameTime >= frameDuration) {
+            frameIndex = (frameIndex + 1) % frames.length;
+            lastFrameTime = time;
+        }
+
+        const frame = frames[frameIndex];
+        if (frame.complete && frame.naturalWidth) {
+            spriteContext.clearRect(0, 0, width, height);
+            spriteContext.drawImage(frame, 0, 0, width, height);
+        }
+        requestAnimationFrame(drawSprite);
+    }
+    Promise.all(frames.map(frame => new Promise(resolve => {
+        frame.onload = resolve;
+        frame.onerror = resolve;
+    }))).then(() => requestAnimationFrame(drawSprite));
+}
 
 
 const scene = new THREE.Scene();
