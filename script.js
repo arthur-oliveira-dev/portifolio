@@ -3,6 +3,26 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
+const themeToggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+const savedTheme = localStorage.getItem('portfolio-theme');
+if (savedTheme === 'light') root.dataset.theme = 'light';
+
+function updateThemeButton() {
+    const isLight = root.dataset.theme === 'light';
+    themeToggle?.setAttribute('aria-label', `Ativar modo ${isLight ? 'escuro' : 'claro'}`);
+    if (themeToggle) themeToggle.innerHTML = `${isLight ? '☾' : '☀'} <span>Modo ${isLight ? 'escuro' : 'claro'}</span>`;
+}
+
+updateThemeButton();
+themeToggle?.addEventListener('click', () => {
+    const nextTheme = root.dataset.theme === 'light' ? 'dark' : 'light';
+    if (nextTheme === 'dark') delete root.dataset.theme;
+    else root.dataset.theme = nextTheme;
+    localStorage.setItem('portfolio-theme', nextTheme);
+    updateThemeButton();
+});
+
 const canvas = document.getElementById('penguinCanvas');
 const spriteCanvas = document.querySelector('.penguin');
 
