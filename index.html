@@ -75,28 +75,28 @@
 
             <li class="capsula-hover" aria-hidden="true"></li>
 
-            <li><a href="#sobreMim">Sobre Mim</a></li>
+            <li id="fonte1"><a href="#sobreMim">Sobre Mim</a></li>
             <li class="divisor" aria-hidden="true"></li>
 
-            <li><a href="#skills">Skills</a></li>
+            <li id="fonte1"><a href="#skills">Skills</a></li>
             <li class="divisor" aria-hidden="true"></li>
 
-            <li><a href="#projetos">Projetos</a></li>
+            <li id="fonte1"><a href="#projetos">Projetos</a></li>
             <li class="divisor" aria-hidden="true"></li>
 
-            <li><a href="#contato">Contato</a></li>
+            <li id="fonte1"><a href="#contato">Contato</a></li>
 
         </ul>
     </nav>
 
     <div class="acoes">
-        <button class="btn" type="button">CSV</button>
+        <button class="btn" type="button">Currículo</button>
 
         <button
             class="btn btn-modo"
             id="themeToggle"
-            type="button"
-            aria-label="Ativar modo claro">
+            type="button">
+            
             ☀ <span>Modo claro</span>
         </button>
     </div>
@@ -127,23 +127,18 @@
 <section class="batata-intro" id="sobreMim">
     <div class="bloco-intro">
 
-        <div class="sobre2">
-            &lt;<span class="h1Texto">h1</span>
-            <span class="classes">id</span>=
+        <div class="sobre2" id="fonte2">
+            &lt;<span class="h1Texto">h1 </span><span class="classes">id</span>=
             <span class="int_cor">”introdução”</span>&gt;
-
             Prazer, sou o Arthur, tenho 17 anos,
             atualmente estudo no colégio
             <span class="espaço">COTEMIG</span>,
             no qual estou no terceiro ano do E.M.
             e faço técnico em informática.
-
             <p>
-                Meus estilos musicais favoritos são rock,
-                metal e jazz pop. Gosto de ambientes de
+                Gosto de ambientes de
                 conversa leves e engraçados, diversos
                 assuntos entre várias outras coisas.
-            </p>
 
             &lt;<span class="h1Texto">/h1</span>&gt;
         </div>
@@ -155,9 +150,335 @@
     </div>
 </section>
 
+
+
+<section class="skills-section" id="skills" aria-labelledby="skills-title">
+    <div class="skills-section__inner">
+        <header class="skills-section__heading">
+            <p class="skills-section__eyebrow">CONHECIMENTO EM PRÁTICA</p>
+            <h2 id="skills-title">Skills</h2>
+            <p class="skills-section__intro">Competências que venho desenvolvendo em tecnologia e no trabalho em equipe.</p>
+        </header>
+
+       
+        <section class="skills-row" aria-labelledby="hard-skills-title">
+            <div class="skills-row__heading">
+                <div>
+                    <p class="skills-row__eyebrow">TECNOLOGIA</p>
+                    <h3 id="hard-skills-title">Hard Skills</h3>
+                </div>
+                <div class="skills-row__controls" role="group" aria-label="Controles da fileira Hard Skills">
+                    <button class="skills-row__control" type="button" data-scroll="-1" >‹</button>
+                    <button class="skills-row__control" type="button" data-scroll="1" >›</button>
+                </div>
+            </div>
+            <div class="skills-row__track" tabindex="0" aria-label="Hard Skills; use as setas para percorrer as capas">
+                <!-- HTML5 -->
+                <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger>
+                        <img src="assets/skills/covers/html.svg" alt="Ilustração de uma página web representando HTML5" class="skill-card__image">
+                    </button>
+                    <template class="skill-card__source">
+                        <div class="skill-detail__source">
+                            <h3 class="skill-detail__title">HTML5</h3>
+                            <p class="skill-detail__category">Hard Skill</p>
+                            <p class="skill-detail__context">Desenvolvimento web</p>
+                            <p class="skill-detail__project" data-skill-project>Portfólio pessoal</p>
+                            <p class="skill-detail__description">Estruturação de páginas web com HTML semântico, 
+                                organizando conteúdo para uma experiência clara e acessível.</p>
+                            <div class="skill-detail__metadata"><span>HTML</span><span>Interfaces web</span></div>
+                            <a class="skill-action skill-action--primary" data-demo-link href="https://github.com/arthur-oliveira-dev/portifolio">Abrir Link</a>
+                            <div class="skill-detail__group" data-detail-placement="main">
+                                <h4>Aplicações</h4>
+                                <ul><li>Estruturação de páginas e seções.</li><li>Uso de elementos semânticos e formulários.</li><li>Organização de conteúdo acessível.</li></ul>
+                            </div>
+                            <div class="skill-detail__group" data-detail-placement="side">
+                                <h4>Tecnologias relacionadas</h4>
+                                <ul><li>CSS3</li><li>JavaScript</li></ul>
+                            </div>
+                            <div class="skill-detail__files">
+                                <article class="skill-file" data-skill-file data-file-category="Páginas">
+                                    <img src="assets/skills/covers/html.svg" alt="Prévia gráfica associada ao arquivo index.html" class="skill-file__thumbnail">
+                                    <div class="skill-file__body"><p class="skill-file__name">index.html</p><p class="skill-file__description">Página principal e estrutura de conteúdo do portfólio.</p><div class="skill-file__meta"><span>Arquivo HTML</span><span data-file-project></span></div></div>
+                                </article>
+                            </div>
+                        </div>
+                    </template>
+                </article>
+
+                <!-- CSS3 -->
+                <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger>
+                        <img src="assets/skills/covers/css.svg" alt="Ilustração de uma interface estilizada representando CSS3" class="skill-card__image">
+                    </button>
+                    <template class="skill-card__source">
+                        <div class="skill-detail__source">
+                            <h3 class="skill-detail__title">CSS3</h3>
+                            <p class="skill-detail__category">Hard Skill</p>
+                            <p class="skill-detail__context">Estilo e responsividade</p>
+                            <p class="skill-detail__project" data-skill-project>Portfólio pessoal</p>
+                            <p class="skill-detail__description">Estilização de interfaces com foco em identidade visual, organização do layout e adaptação a diferentes telas.</p>
+                            <div class="skill-detail__metadata"><span>CSS</span><span>Interfaces web</span><span>Responsividade</span></div>
+                            <a class="skill-action skill-action--primary" data-demo-link href="https://github.com/arthur-oliveira-dev/portifolio">Abrir Link</a>
+                            <div class="skill-detail__group" data-detail-placement="main">
+                                <h4>Aplicações</h4>
+                                <ul><li>Layouts com Flexbox e Grid.</li><li>Interfaces para celular e desktop.</li><li>Temas, transições e efeitos visuais.</li></ul>
+                            </div>
+                            <div class="skill-detail__group" data-detail-placement="side">
+                                <h4>Tecnologias relacionadas</h4>
+                                <ul><li>HTML5</li><li>JavaScript</li></ul>
+                            </div>
+                            <div class="skill-detail__files">
+                                <article class="skill-file" data-skill-file data-file-category="Estilos">
+                                    <img src="assets/skills/covers/css.svg" alt="Prévia gráfica associada ao arquivo style.css" class="skill-file__thumbnail">
+                                    <div class="skill-file__body"><p class="skill-file__name">style.css</p><p class="skill-file__description">Identidade visual, layouts, temas e adaptação para diferentes telas.</p><div class="skill-file__meta"><span>Arquivo CSS</span><span data-file-project></span></div></div>
+                                </article>
+                            </div>
+                        </div>
+                    </template>
+                </article>
+
+                <!-- JavaScript -->
+                <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger>
+                        <img src="assets/skills/covers/javascript.svg" alt="Ilustração de código representando JavaScript" class="skill-card__image">
+                    </button>
+                    <template class="skill-card__source">
+                        <div class="skill-detail__source">
+                            <h3 class="skill-detail__title">JavaScript</h3>
+                            <p class="skill-detail__category">Hard Skill</p>
+                            <p class="skill-detail__context">Programação e interatividade</p>
+                            <p class="skill-detail__project" data-skill-project>Portfólio pessoal</p>
+                            <p class="skill-detail__description">Lógica e interatividade para páginas web, conectando eventos, conteúdo e comportamento da interface.</p>
+                            <div class="skill-detail__metadata"><span>JavaScript</span><span>DOM</span><span>Three.js</span></div>
+                            <a class="skill-action skill-action--primary" data-demo-link href="https://github.com/arthur-oliveira-dev/portifolio">Abrir Link</a>
+                            <div class="skill-detail__group" data-detail-placement="main">
+                                <h4>Aplicações</h4>
+                                <ul><li>Eventos e interações de interface.</li><li>Manipulação do DOM e de dados presentes no HTML.</li><li>Animações e comportamento de componentes.</li></ul>
+                            </div>
+                            <div class="skill-detail__group" data-detail-placement="side">
+                                <h4>Tecnologias relacionadas</h4>
+                                <ul><li>HTML5</li><li>CSS3</li><li>Three.js</li></ul>
+                            </div>
+                            <div class="skill-detail__files">
+                                <article class="skill-file" data-skill-file data-file-category="Scripts">
+                                    <img src="assets/skills/covers/javascript.svg" alt="Prévia gráfica associada ao arquivo script.js" class="skill-file__thumbnail">
+                                    <div class="skill-file__body"><p class="skill-file__name">script.js</p><p class="skill-file__description">Interações da interface, animação e comportamento 3D.</p><div class="skill-file__meta"><span>Arquivo JavaScript</span><span data-file-project></span></div></div>
+                                </article>
+                            </div>
+                        </div>
+                    </template>
+                </article>
+
+                <!-- Three.js -->
+                <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger>
+                        <img src="assets/skills/covers/threejs.svg" alt="Ilustração de uma cena 3D representando Three.js" class="skill-card__image">
+                    </button>
+                    <template class="skill-card__source">
+                        <div class="skill-detail__source">
+                            <h3 class="skill-detail__title">Three.js</h3>
+                            <p class="skill-detail__category">Hard Skill</p>
+                            <p class="skill-detail__context">Experiências 3D para web</p>
+                            <p class="skill-detail__project" data-skill-project>Portfólio pessoal</p>
+                            <p class="skill-detail__description">Exploração de cenas 3D interativas no navegador, incluindo modelos, câmera, iluminação e controles.</p>
+                            <div class="skill-detail__metadata"><span>Three.js</span><span>WebGL</span><span>Modelos 3D</span></div>
+                            <a class="skill-action skill-action--primary" data-demo-link href="https://github.com/arthur-oliveira-dev/portifolio">Abrir Link</a>
+                            <div class="skill-detail__group" data-detail-placement="main">
+                                <h4>Aplicações</h4>
+                                <ul><li>Exibição de modelos 3D em páginas web.</li><li>Configuração de cena, câmera e iluminação.</li><li>Controles interativos e redimensionamento responsivo.</li></ul>
+                            </div>
+                            <div class="skill-detail__group" data-detail-placement="side">
+                                <h4>Tecnologias relacionadas</h4>
+                                <ul><li>JavaScript</li><li>WebGL</li></ul>
+                            </div>
+                            <div class="skill-detail__files">
+                                <article class="skill-file" data-skill-file data-file-category="Scripts">
+                                    <img src="assets/skills/covers/threejs.svg" alt="Prévia gráfica associada ao arquivo script.js" class="skill-file__thumbnail">
+                                    <div class="skill-file__body"><p class="skill-file__name">script.js</p><p class="skill-file__description">Criação da cena 3D, câmera, iluminação e controles.</p><div class="skill-file__meta"><span>Arquivo JavaScript</span><span data-file-project></span></div></div>
+                                </article>
+                                <article class="skill-file" data-skill-file data-file-category="Assets">
+                                    <img src="assets/skills/covers/threejs.svg" alt="Prévia gráfica associada ao modelo club_penguin.glb" class="skill-file__thumbnail">
+                                    <div class="skill-file__body"><p class="skill-file__name">images_models/club_penguin.glb</p><p class="skill-file__description">Modelo 3D carregado na cena do portfólio.</p><div class="skill-file__meta"><span>Modelo 3D GLB</span><span data-file-project></span></div></div>
+                                </article>
+                            </div>
+                        </div>
+                    </template>
+                </article>
+                 <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger>
+                        <img src="assets/skills/covers/threejs.svg" alt="Ilustração de uma cena 3D representando Three.js" class="skill-card__image">
+                    </button>
+                    <template class="skill-card__source">
+                        <div class="skill-detail__source">
+                            <h3 class="skill-detail__title">Three.js</h3>
+                            <p class="skill-detail__category">Hard Skill</p>
+                            <p class="skill-detail__context">Experiências 3D para web</p>
+                            <p class="skill-detail__project" data-skill-project>Portfólio pessoal</p>
+                            <p class="skill-detail__description">Exploração de cenas 3D interativas no navegador, incluindo modelos, câmera, iluminação e controles.</p>
+                            <div class="skill-detail__metadata"><span>Three.js</span><span>WebGL</span><span>Modelos 3D</span></div>
+                            <a class="skill-action skill-action--primary" data-demo-link href="https://github.com/arthur-oliveira-dev/portifolio">Abrir Link</a>
+                            <div class="skill-detail__group" data-detail-placement="main">
+                                <h4>Aplicações</h4>
+                                <ul><li>Exibição de modelos 3D em páginas web.</li><li>Configuração de cena, câmera e iluminação.</li><li>Controles interativos e redimensionamento responsivo.</li></ul>
+                            </div>
+                            <div class="skill-detail__group" data-detail-placement="side">
+                                <h4>Tecnologias relacionadas</h4>
+                                <ul><li>JavaScript</li><li>WebGL</li></ul>
+                            </div>
+                            <div class="skill-detail__files">
+                                <article class="skill-file" data-skill-file data-file-category="Scripts">
+                                    <img src="assets/skills/covers/threejs.svg" alt="Prévia gráfica associada ao arquivo script.js" class="skill-file__thumbnail">
+                                    <div class="skill-file__body"><p class="skill-file__name">script.js</p><p class="skill-file__description">Criação da cena 3D, câmera, iluminação e controles.</p><div class="skill-file__meta"><span>Arquivo JavaScript</span><span data-file-project></span></div></div>
+                                </article>
+                                <article class="skill-file" data-skill-file data-file-category="Assets">
+                                    <img src="assets/skills/covers/threejs.svg" alt="Prévia gráfica associada ao modelo club_penguin.glb" class="skill-file__thumbnail">
+                                    <div class="skill-file__body"><p class="skill-file__name">images_models/club_penguin.glb</p><p class="skill-file__description">Modelo 3D carregado na cena do portfólio.</p><div class="skill-file__meta"><span>Modelo 3D GLB</span><span data-file-project></span></div></div>
+                                </article>
+                            </div>
+                        </div>
+                    </template>
+                </article>
+            
+            </div>
+        </section>
+       
+
+
+        <!-- SOFT SKILLS -->
+        <section class="skills-row" aria-labelledby="soft-skills-title">
+            <div class="skills-row__heading">
+                <div>
+                    <p class="skills-row__eyebrow">COMPETÊNCIAS PESSOAIS</p>
+                    <h3 id="soft-skills-title">Soft Skills</h3>
+                </div>
+                <div class="skills-row__controls" role="group" aria-label="Controles da fileira Soft Skills">
+                    <button class="skills-row__control" type="button" data-scroll="-1" aria-label="Rolar Soft Skills para a esquerda">‹</button>
+                    <button class="skills-row__control" type="button" data-scroll="1" aria-label="Rolar Soft Skills para a direita">›</button>
+                </div>
+            </div>
+            <div class="skills-row__track" tabindex="0" aria-label="Soft Skills; use as setas para percorrer as capas">
+                <!-- RESOLUÇÃO DE PROBLEMAS -->
+                <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger><img src="assets/skills/covers/problem-solving.svg" alt="Ilustração de uma lâmpada e uma peça representando resolução de problemas" class="skill-card__image"></button>
+                    <template class="skill-card__source"><div class="skill-detail__source">
+                        <h3 class="skill-detail__title">Resolução de problemas</h3><p class="skill-detail__category">Soft Skill</p><p class="skill-detail__context">Problem Solving</p>
+                        <p class="skill-detail__description">Capacidade de investigar dificuldades técnicas, explorar diferentes abordagens e buscar soluções adequadas de acordo com o contexto do problema.</p>
+                        <div class="skill-detail__metadata"><span>Análise</span><span>Investigação</span></div>
+                        <div class="skill-detail__group" data-detail-placement="practical"><h4>Investigação e experimentação</h4><ul><li>Investigação de erros.</li><li>Testes de diferentes alternativas.</li><li>Consulta a documentações e referências.</li></ul></div>
+                    </div></template>
+                </article>
+
+                <!-- APRENDIZADO CONTÍNUO -->
+                <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger><img src="assets/skills/covers/learning.svg" alt="Ilustração de um livro aberto representando aprendizado contínuo" class="skill-card__image"></button>
+                    <template class="skill-card__source"><div class="skill-detail__source">
+                        <h3 class="skill-detail__title">Aprendizado contínuo</h3><p class="skill-detail__category">Soft Skill</p><p class="skill-detail__context">Continuous Learning</p>
+                        <p class="skill-detail__description">Interesse constante em adquirir conhecimentos, aprofundar habilidades existentes e explorar novas tecnologias por meio de estudos e experimentação prática.</p>
+                        <div class="skill-detail__metadata"><span>Estudo</span><span>Experimentação</span></div>
+                        <div class="skill-detail__group" data-detail-placement="practical"><h4>Estudo e aplicação</h4><ul><li>Exploração de recursos além do conteúdo apresentado.</li><li>Estudo de novas tecnologias.</li><li>Aplicação de conhecimentos em projetos pessoais.</li></ul></div>
+                    </div></template>
+                </article>
+
+                <!-- AUTONOMIA -->
+                <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger><img src="assets/skills/covers/autonomy.svg" alt="Ilustração de uma lupa representando autonomia" class="skill-card__image"></button>
+                    <template class="skill-card__source"><div class="skill-detail__source">
+                        <h3 class="skill-detail__title">Autonomia</h3><p class="skill-detail__category">Soft Skill</p><p class="skill-detail__context">Autonomy</p>
+                        <p class="skill-detail__description">Capacidade de conduzir pesquisas, buscar referências e desenvolver soluções de maneira independente, reconhecendo quando é necessário recorrer a outras fontes de conhecimento.</p>
+                        <div class="skill-detail__metadata"><span>Pesquisa</span><span>Iniciativa</span></div>
+                        <div class="skill-detail__group" data-detail-placement="practical"><h4>Pesquisa independente</h4><ul><li>Pesquisa independente.</li><li>Investigação de problemas.</li><li>Busca por documentações e materiais de referência.</li></ul></div>
+                    </div></template>
+                </article>
+
+                <!-- COLABORAÇÃO -->
+                <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger><img src="assets/skills/covers/collaboration.svg" alt="Ilustração de pessoas conectadas representando colaboração" class="skill-card__image"></button>
+                    <template class="skill-card__source"><div class="skill-detail__source">
+                        <h3 class="skill-detail__title">Colaboração</h3><p class="skill-detail__category">Soft Skill</p><p class="skill-detail__context">Teamwork &amp; Collaboration</p>
+                        <p class="skill-detail__description">Disposição para compartilhar ideias, trocar conhecimentos e contribuir com outras pessoas na construção de objetivos em comum.</p>
+                        <div class="skill-detail__metadata"><span>Comunicação</span><span>Trabalho em equipe</span></div>
+                        <div class="skill-detail__group" data-detail-placement="practical"><h4>Construção em conjunto</h4><ul><li>Participação em atividades coletivas.</li><li>Troca de ideias.</li><li>Colaboração em projetos e atividades em grupo.</li></ul></div>
+                    </div></template>
+                </article>
+
+                <!-- CURIOSIDADE INTELECTUAL -->
+                <article class="skill-card" data-skill-card>
+                    <button class="skill-card__cover" type="button" data-skill-trigger><img src="assets/skills/covers/curiosity.svg" alt="Ilustração de uma lâmpada representando curiosidade intelectual" class="skill-card__image"></button>
+                    <template class="skill-card__source"><div class="skill-detail__source">
+                        <h3 class="skill-detail__title">Curiosidade intelectual</h3><p class="skill-detail__category">Soft Skill</p><p class="skill-detail__context">Intellectual Curiosity</p>
+                        <p class="skill-detail__description">Interesse em compreender o funcionamento de tecnologias, investigar novas possibilidades e explorar recursos além das necessidades imediatas de um projeto.</p>
+                        <div class="skill-detail__metadata"><span>Exploração</span><span>Experimentação</span></div>
+                        <div class="skill-detail__group" data-detail-placement="practical"><h4>Tecnologias e experiências exploradas</h4><ul><li>Exploração de Three.js.</li><li>Estudos de shaders e efeitos visuais.</li><li>Experimentação de novas interações para interfaces web.</li></ul></div>
+                    </div></template>
+                </article>
+            </div>
+        </section>
+    </div>
+</section>
+
+<!-- Pré-visualização flutuante, preenchida com os dados HTML do card ativo. -->
+<article class="skill-preview" data-skill-preview aria-hidden="true" inert>
+    <div class="skill-preview__cover"><img data-preview-image alt=""><div class="skill-preview__cover-gradient"></div></div>
+    <div class="skill-preview__body">
+        <div class="skill-preview__actions">
+            <a class="skill-action skill-action--primary" data-preview-demo hidden><span aria-hidden="true">▶</span> Abrir Link</a>
+            <button class="skill-action skill-action--circle" type="button" data-preview-info aria-label="Abrir detalhes da competência">i</button>
+            <a class="skill-action skill-action--circle" data-preview-source hidden aria-label="Abrir repositório">⌘</a>
+        </div>
+        <p class="skill-preview__category" data-preview-category></p>
+        <h3 data-preview-title></h3>
+        <p class="skill-preview__description" data-preview-description></p>
+    </div>
+</article>
+
+<!-- Janela de detalhes em três áreas: hero, descrição/metadados e arquivos/aplicações. -->
+<dialog class="skills-dialog" aria-labelledby="skills-dialog-title">
+    <article class="skills-dialog__panel">
+        <button class="skills-dialog__close" type="button" data-skill-close aria-label="Fechar detalhes">×</button>
+        <section class="skills-dialog__hero">
+            <img class="skills-dialog__cover" data-detail-cover alt="">
+            <div class="skills-dialog__hero-gradient"></div>
+            <div class="skills-dialog__hero-content">
+                <p class="skills-dialog__category" data-detail-category></p>
+                <h2 id="skills-dialog-title"></h2>
+            </div>
+        </section>
+        <div class="skills-dialog__actions" data-detail-actions>
+            <a class="skill-action skill-action--primary" data-detail-demo hidden><span aria-hidden="true">▶</span> Abrir Link</a>
+            <a class="skill-action skill-action--circle" data-detail-source hidden aria-label="Abrir repositório">⌘</a>
+        </div>
+        <section class="skills-dialog__details-grid">
+            <div class="skills-dialog__main">
+                <div class="skills-dialog__metadata" data-detail-metadata></div>
+                <section class="skills-dialog__description-block" data-description-block>
+                    <h3>Descrição</h3>
+                    <p class="skills-dialog__description" data-detail-description></p>
+                    <div class="skills-dialog__main-groups" data-main-groups></div>
+                </section>
+            </div>
+            <aside class="skills-dialog__side" data-side-groups></aside>
+        </section>
+        <section class="skills-dialog__files" data-files-section hidden>
+            <header class="skills-dialog__files-heading">
+                <div><p class="skills-dialog__eyebrow">CONTEÚDO DO PROJETO</p><h3>Arquivos e páginas</h3></div>
+                <label class="skills-dialog__filter-label">Filtrar arquivos
+                    <select class="skills-dialog__filter" data-file-filter aria-label="Filtrar arquivos por categoria"><option value="all">Todos os arquivos</option></select>
+                </label>
+            </header>
+            <p class="skills-dialog__files-summary" data-files-summary aria-live="polite"></p>
+            <div class="skills-dialog__file-list" data-file-list></div>
+        </section>
+        <section class="skills-dialog__practical" data-practical-section hidden>
+            <p class="skills-dialog__eyebrow">NA PRÁTICA</p><h3>Aplicações práticas</h3>
+            <div data-practical-groups></div>
+        </section>
+    </article>
+</dialog>
+
+
 <script type="module" src="script.js"></script>
 
 </body>
 
 </html>
-
