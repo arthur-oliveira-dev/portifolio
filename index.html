@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portifólio</title>
-
+<!-- <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script> -->
     <script type="importmap">
     {
         "imports": {
@@ -24,60 +24,138 @@
 </head>
 
 <body>
-    <header class="header-principal">
-        <nav>
-            <ul class="menu-lista">
-                <li><a href="">Sobre Mim</a></li>
-                <li class="divisor" aria-hidden="true"></li>
-                <li><a href="">Skills</a></li>
-                <li class="divisor" aria-hidden="true"></li>
-                <li><a href="">Projetos</a></li>
-                <li class="divisor" aria-hidden="true"></li>
-                <li><a href="">Contato</a></li>
-            </ul>
-        </nav>
+ <svg xmlns="http://www.w3.org/2000/svg"
+     aria-hidden="true"
+     width="0"
+     height="0"
+     style="position:absolute;overflow:hidden">
 
+    <filter id="liquidGlassDistortion"
+            x="-15%"
+            y="-30%"
+            width="130%"
+            height="160%"
+            color-interpolation-filters="sRGB">
 
-
-        <div class="acoes">
-            <button class="btn" type="button">Csv</button>
-            <button class="btn btn-modo" id="themeToggle" type="button" aria-label="Ativar modo claro">☀ <span>Modo claro</span></button>
-        </div>
-    </header>
-    <section class="introdução">
-        <div class="flex1">
-            <div class="Myname">
-                <h1 class="mn">My name is</h1>
-                <h1 class="ao">Arthur <br>Oliveira</h1>
-            </div>
         
-            <div class="penguin-viewer">
-                <canvas id="penguinCanvas" aria-label="Modelo 3D de pinguim"></canvas>
-            </div>
-        </div>
-            <script type="module" src="script.js"></script>
-        </div>
-    </section>
-    <h1 class="sobre1">Sobre Mim</h1>
-    <section class="batata-intro">
-     
-        <div class="bloco-intro">
-            <div class="sobre2">
-                &lt;<span class="h1Texto">h1</span> id=”introdução”&gt;
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus ultrices lacus ac mauris commodo, quis
-                bibendum elit pulvinar. Sed rutrum molestie nulla, eu cursus ex interdum eget. Quisque feugiat ante ut
-                blandit cursus. Nullam faucibus at nisl eu facilisis. Donec nisi diam, tempor quis lacinia quis,
-                venenatis rutrum ipsum. Morbi.
-                &lt;<span class="h1Texto">/h1</span>&gt;
+        <feTurbulence
+            type="fractalNoise"
+            baseFrequency="0.010 0.025"
+            numOctaves="1"
+            seed="8"
+            result="rawNoise"/>
 
-            </div>
-            <div class="bloco-avatar">
-             <canvas class="penguin"></canvas>
-            </div>
+        
+        <feGaussianBlur
+            in="rawNoise"
+            stdDeviation="3.5"
+            result="smoothNoise"/>
+
+        
+        <feDisplacementMap
+            in="SourceGraphic"
+            in2="smoothNoise"
+            scale="10"
+            xChannelSelector="R"
+            yChannelSelector="G"
+            result="displaced"/>
+
+        
+        <feGaussianBlur
+            in="displaced"
+            stdDeviation="0.35"/>
+
+    </filter>
+</svg>
+
+<header class="header-principal">
+
+    <nav class="nav-principal">
+        <ul class="menu-lista">
+
+            <li class="capsula-hover" aria-hidden="true"></li>
+
+            <li><a href="#sobreMim">Sobre Mim</a></li>
+            <li class="divisor" aria-hidden="true"></li>
+
+            <li><a href="#skills">Skills</a></li>
+            <li class="divisor" aria-hidden="true"></li>
+
+            <li><a href="#projetos">Projetos</a></li>
+            <li class="divisor" aria-hidden="true"></li>
+
+            <li><a href="#contato">Contato</a></li>
+
+        </ul>
+    </nav>
+
+    <div class="acoes">
+        <button class="btn" type="button">CSV</button>
+
+        <button
+            class="btn btn-modo"
+            id="themeToggle"
+            type="button"
+            aria-label="Ativar modo claro">
+            ☀ <span>Modo claro</span>
+        </button>
+    </div>
+
+</header>
+
+   
+<section class="introdução">
+    <div class="flex1">
+
+        <div class="Myname">
+            <h1 class="mn">My name is</h1>
+            <h1 class="ao">Arthur <br>Oliveira</h1>
         </div>
-    </section>
 
+        <div class="penguin-viewer">
+            <canvas
+                id="penguinCanvas"
+                aria-label="Modelo 3D de pinguim">
+            </canvas>
+        </div>
 
+    </div>
+</section>
+
+<h1 class="sobre1">Sobre Mim</h1>
+
+<section class="batata-intro" id="sobreMim">
+    <div class="bloco-intro">
+
+        <div class="sobre2">
+            &lt;<span class="h1Texto">h1</span>
+            <span class="classes">id</span>=
+            <span class="int_cor">”introdução”</span>&gt;
+
+            Prazer, sou o Arthur, tenho 17 anos,
+            atualmente estudo no colégio
+            <span class="espaço">COTEMIG</span>,
+            no qual estou no terceiro ano do E.M.
+            e faço técnico em informática.
+
+            <p>
+                Meus estilos musicais favoritos são rock,
+                metal e jazz pop. Gosto de ambientes de
+                conversa leves e engraçados, diversos
+                assuntos entre várias outras coisas.
+            </p>
+
+            &lt;<span class="h1Texto">/h1</span>&gt;
+        </div>
+
+        <div class="bloco-avatar">
+            <canvas class="penguin"></canvas>
+        </div>
+
+    </div>
+</section>
+
+<script type="module" src="script.js"></script>
 
 </body>
 

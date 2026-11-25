@@ -4,6 +4,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const themeToggle = document.getElementById('themeToggle');
+const header = document.querySelector('.header-principal');
 const root = document.documentElement;
 const savedTheme = localStorage.getItem('portfolio-theme');
 if (savedTheme === 'light') root.dataset.theme = 'light';
@@ -22,6 +23,103 @@ themeToggle?.addEventListener('click', () => {
     localStorage.setItem('portfolio-theme', nextTheme);
     updateThemeButton();
 });
+
+if (header) {
+    const magneticItems = header.querySelectorAll('.menu-lista a, .acoes .btn');
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (canHover) {
+        header.addEventListener('pointermove', (event) => {
+            const bounds = header.getBoundingClientRect();
+            header.style.setProperty('--pointer-x', `${event.clientX - bounds.left}px`);
+            header.style.setProperty('--pointer-y', `${event.clientY - bounds.top}px`);
+
+            magneticItems.forEach((item) => {
+                const itemBounds = item.getBoundingClientRect();
+                const offsetX = event.clientX - (itemBounds.left + itemBounds.width / 2);
+                const offsetY = event.clientY - (itemBounds.top + itemBounds.height / 2);
+                const distance = Math.hypot(offsetX, offsetY);
+                const strength = Math.max(0, 1 - distance / 110) * 0.16;
+                item.style.setProperty('--mag-x', `${offsetX * strength}px`);
+                item.style.setProperty('--mag-y', `${offsetY * strength}px`);
+            });
+        });
+
+        header.addEventListener('pointerleave', () => {
+            magneticItems.forEach((item) => {
+                item.style.setProperty('--mag-x', '0px');
+                item.style.setProperty('--mag-y', '0px');
+            });
+        });
+    }
+
+    let previousStickyState = false;
+    window.addEventListener('scroll', () => {
+        const isStuck = window.scrollY > 24;
+        if (isStuck !== previousStickyState) {
+            header.classList.toggle('is-stuck', isStuck);
+            previousStickyState = isStuck;
+        }
+    }, { passive: true });
+}
+
+// A cápsula acompanha o item sob o ponteiro ou foco e retorna para a seção atual.
+const menu = document.querySelector('.menu-lista');
+const capsule = menu?.querySelector('.capsula-hover');
+const navLinks = menu ? [...menu.querySelectorAll('a[href^="#"]')] : [];
+if (menu && capsule && navLinks.length) {
+    let hoveredLink = null;
+    let currentLink = navLinks[0];
+
+    const moveCapsule = (link) => {
+        if (!link) return;
+        const menuBox = menu.getBoundingClientRect();
+        const linkBox = link.getBoundingClientRect();
+        capsule.style.width = `${linkBox.width}px`;
+        capsule.style.height = `${linkBox.height}px`;
+        capsule.style.transform = `translate(${linkBox.left - menuBox.left}px, ${linkBox.top - menuBox.top}px)`;
+        capsule.classList.add('is-visible');
+    };
+
+    const setCurrent = (link) => {
+        if (!link) return;
+        currentLink = link;
+        navLinks.forEach((item) => {
+            if (item === link) item.setAttribute('aria-current', 'location');
+            else item.removeAttribute('aria-current');
+        });
+        if (!hoveredLink) moveCapsule(currentLink);
+    };
+
+    navLinks.forEach((link) => {
+        link.addEventListener('pointerenter', () => { hoveredLink = link; moveCapsule(link); });
+        link.addEventListener('focus', () => moveCapsule(link));
+        link.addEventListener('blur', () => moveCapsule(currentLink));
+    });
+    menu.addEventListener('pointerleave', () => {
+        hoveredLink = null;
+        moveCapsule(currentLink);
+    });
+
+    const sections = navLinks.map((link) => ({ link, section: document.querySelector(link.getAttribute('href')) }))
+        .filter(({ section }) => section);
+    const updateCurrentSection = () => {
+        const marker = window.innerHeight * 0.38;
+        let visible = sections.filter(({ section }) => {
+            const box = section.getBoundingClientRect();
+            return box.top <= marker && box.bottom > marker;
+        }).at(-1);
+        if (!visible && window.scrollY < 80) visible = sections[0];
+        if (visible) setCurrent(visible.link);
+    };
+
+    window.addEventListener('scroll', updateCurrentSection, { passive: true });
+    window.addEventListener('resize', () => moveCapsule(hoveredLink || currentLink));
+    requestAnimationFrame(() => {
+        updateCurrentSection();
+        moveCapsule(currentLink);
+    });
+}
 
 const canvas = document.getElementById('penguinCanvas');
 const spriteCanvas = document.querySelector('.penguin');
